@@ -35,7 +35,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_TAR_BINARY=1
 	export FOX_USE_ZIP_BINARY=1
         export OF_MIUI_OTA_VENDOR_BACKUP=1
-	export OF_KEEP_DM_VERITY_FORCED_ENCRYPTION=1
 	export OF_FORCE_MAGISKBOOT_BOOT_PATCH_MIUI=1
 		export TARGET_DEVICE_ALT="willow"
 	export OF_FBE_METADATA_MOUNT_IGNORE=1
@@ -44,6 +43,13 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_FIX_OTA_UPDATE_MANUAL_FLASH_ERROR=1
 	export OF_SKIP_MULTIUSER_FOLDERS_BACKUP=1
 	export OF_OTA_BACKUP_STOCK_BOOT_IMAGE=1
+	export FOX_BUGGED_AOSP_ARB_WORKAROUND=1510672800
+	export OF_USE_TWRP_SAR_DETECT=1
+	export FOX_QUICK_BACKUP_LIST="/data;/boot;/vendor_image;/system_image"
+
+	# R11 build vars
+	export FOX_R11=1
+	export FOX_ADVANCED_SECURITY=1
 
 	# let's see what are our build VARs
 	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
