@@ -17,7 +17,7 @@
 FDEVICE="ginkgo"
 if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_DELETE_AROMAFM="1"
-        export PLATFORM_VERSION="10.0.0"
+        export PLATFORM_VERSION="16.1.0"
 	export OF_USE_MAGISKBOOT=1
 	export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
 	export OF_USE_NEW_MAGISKBOOT=1
@@ -46,7 +46,8 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_BUGGED_AOSP_ARB_WORKAROUND=1510672800
 	export OF_USE_TWRP_SAR_DETECT=1
 	export FOX_QUICK_BACKUP_LIST="/data;/boot;/vendor_image;/system_image"
-
+	export OF_DISABLE_MIUI_OTA_BY_DEFAULT=1
+	
 	# R11 build vars
 	export FOX_R11=1
 	export FOX_ADVANCED_SECURITY=1
