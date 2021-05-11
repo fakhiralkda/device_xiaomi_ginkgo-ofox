@@ -47,6 +47,9 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_USE_TWRP_SAR_DETECT=1
 	export FOX_QUICK_BACKUP_LIST="/data;/boot;/vendor_image;/system_image"
 	export OF_DISABLE_MIUI_OTA_BY_DEFAULT=1
+	export OF_PATCH_AVB20=1
+	export FOX_DISABLE_APP_MANAGER=1
+	export FOX_USE_SPECIFIC_MAGISK_ZIP="./magisk/magisk.apk"
 	
 	# R11 build vars
 	export FOX_R11=1
