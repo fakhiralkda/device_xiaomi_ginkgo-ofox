@@ -1,0 +1,33 @@
+name: build
+on:
+  workflow_dispatch:
+    inputs:
+      MANIFEST:
+        description: 'Manifest URL with -b branch'
+        required: true
+        default: 'https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0'
+      DT_LINK:
+        description: 'DT Link with -b branch'
+
+env:
+  MANIFEST: ${{ github.event.inputs.MANIFEST }}
+  DT_LINK: ${{ github.event.inputs.DT_LINK }}
+  VENDOR: "xiaomi"
+  CODENAME: "ginkgo"
+  FLAVOR: "eng"
+  TZ: "Asia/Jakarta"
+
+jobs:
+  rec-ci:
+    runs-on: ubuntu-20.04
+    steps:
+       - uses: rokibhasansagar/slimhub_actions@main
+       - uses: PitchBlackRecoveryProject/Recovery-Compiler@production   
+       - uses: actions/upload-artifact@v2.2.3
+         with:  
+           name: ofox
+           path: |
+             /home/runner/builder/out/target/product/*/*.img
+             /home/runner/builder/out/target/product/*/*.zip
+           if-no-files-found: warn
+
