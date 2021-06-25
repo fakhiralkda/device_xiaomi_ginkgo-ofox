@@ -27,7 +27,6 @@ jobs:
          with:  
            name: ofox
            path: |
-             /home/runner/builder/out/target/product/*/*.img
-             /home/runner/builder/out/target/product/*/*.zip
+             /home/runner/builder/out/target/product/ginkgo/*ginkgo*.zip
            if-no-files-found: warn
 
