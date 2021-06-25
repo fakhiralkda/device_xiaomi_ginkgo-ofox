@@ -8,14 +8,19 @@ on:
         default: 'https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0'
       DT_LINK:
         description: 'DT Link with -b branch'
+      REC_NAME:
+        required: true
+        default: 'ofox'
 
 env:
   MANIFEST: ${{ github.event.inputs.MANIFEST }}
   DT_LINK: ${{ github.event.inputs.DT_LINK }}
+  REC_NAME: ${{ github.event.inputs.REC_NAME }}
   VENDOR: "xiaomi"
   CODENAME: "ginkgo"
   FLAVOR: "eng"
   TZ: "Asia/Jakarta"
+  GTOKEN: ${{ secrets.GTOKEN }}
 
 jobs:
   rec-ci:
@@ -23,11 +28,6 @@ jobs:
     steps:
        - uses: rokibhasansagar/slimhub_actions@main
        - uses: PitchBlackRecoveryProject/Recovery-Compiler@production   
-       - uses: actions/upload-artifact@v2.2.3
-         with:  
-           name: ofox
-           path: |
-             /home/runner/builder/out/target/product/*/*.img
-             /home/runner/builder/out/target/product/*/*.zip
-           if-no-files-found: warn
-
+       - run: |
+           cd /home/runner/builder || exit 1
+           ghr -u fakhiralkda -r recovery-tree -c ${GITHUB_SHA} -t ${GTOKEN} -n "${REC_NAME} $(date '+%H%M-%y%m%d') ${CODENAME}" v1.$(date '+%H%M.%y%m%d') out/target/product/ginkgo/*ginkgo*
