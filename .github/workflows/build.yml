@@ -1,0 +1,33 @@
+name: build
+on:
+  workflow_dispatch:
+    inputs:
+      MANIFEST:
+        description: 'Manifest URL with -b branch'
+        required: true
+        default: 'https://github.com/PitchBlackRecoveryProject/manifest_pb -b android-9.0'
+      DT_LINK:
+        description: 'DT Link with -b branch'
+      REC_NAME:
+        required: true
+        default: 'pbrp'
+
+env:
+  MANIFEST: ${{ github.event.inputs.MANIFEST }}
+  DT_LINK: ${{ github.event.inputs.DT_LINK }}
+  REC_NAME: ${{ github.event.inputs.REC_NAME }}
+  VENDOR: "xiaomi"
+  CODENAME: "pine"
+  FLAVOR: "eng"
+  TZ: "Asia/Jakarta"
+  GTOKEN: ${{ secrets.GTOKEN }}
+
+jobs:
+  rec-ci:
+    runs-on: ubuntu-20.04
+    steps:
+       - uses: rokibhasansagar/slimhub_actions@main
+       - uses: PitchBlackRecoveryProject/Recovery-Compiler@production   
+       - run: |
+           cd /home/runner/builder || exit 1
+           ghr -u fakhiralkda -r recovery-tree -c ${GITHUB_SHA} -t ${GTOKEN} -n "${REC_NAME} $(date '+%H%M-%y%m%d') ${CODENAME}" v1.$(date '+%H%M.%y%m%d') out/target/product/pine/*pine*
