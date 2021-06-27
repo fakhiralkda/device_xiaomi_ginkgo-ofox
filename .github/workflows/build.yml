@@ -28,6 +28,9 @@ jobs:
     steps:
        - uses: rokibhasansagar/slimhub_actions@main
        - uses: PitchBlackRecoveryProject/Recovery-Compiler@production   
-       - run: |
-           cd /home/runner/builder || exit 1
-           ghr -u fakhiralkda -r recovery-tree -c ${GITHUB_SHA} -t ${GTOKEN} -n "${REC_NAME} $(date '+%H%M-%y%m%d') ${CODENAME}" v1.$(date '+%H%M.%y%m%d') out/target/product/ginkgo/*ginkgo*
+       - uses: actions/upload-artifact@v2.2.3
+         with:  
+           name: ofox
+           path: |
+             /home/runner/builder/out/target/product/ginkgo/*ginkgo*.zip
+           if-no-files-found: warn
